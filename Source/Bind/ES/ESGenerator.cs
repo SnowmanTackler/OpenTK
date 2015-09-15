@@ -12,8 +12,8 @@ namespace Bind.ES
     // Generator implementation for OpenGL ES 1.0 and 1.1
     class ESGenerator : Generator
     {
-        public ESGenerator(Settings settings, string dirName)
-            : base(settings, dirName)
+        public ESGenerator(Settings settings)
+            : base(settings)
         {
             Settings.DefaultOutputPath = Path.Combine(
                 Settings.DefaultOutputPath, "../ES11");
@@ -24,6 +24,9 @@ namespace Bind.ES
             Settings.DefaultWrappersFile = "ES11.cs";
             Settings.DefaultDocPath = Path.Combine(
                 Settings.DefaultDocPath, "ES20"); // no ES11 docbook sources available
+
+            Settings.OverridesFiles.Add("GL2/overrides.xml");
+            Settings.OverridesFiles.Add("GL2/ES/1.1/");
 
             // Khronos releases a combined 1.0+1.1 specification,
             // so we cannot distinguish between the two.

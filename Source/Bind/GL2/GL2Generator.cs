@@ -35,8 +35,8 @@ namespace Bind.GL2
 
     class GL2Generator : Generator
     {
-        public GL2Generator(Settings settings, string dirname)
-            : base(settings, dirname)
+        public GL2Generator(Settings settings)
+            : base(settings)
         {
             if (Settings.Compatibility == Settings.Legacy.Tao)
             {
@@ -55,6 +55,9 @@ namespace Bind.GL2
             Settings.DefaultWrappersFile = "GL.cs";
             Settings.DefaultDocPath = Path.Combine(
                 Settings.DefaultDocPath, "GL");
+
+            Settings.OverridesFiles.Add("GL2/overrides.xml");
+            Settings.OverridesFiles.Add("GL2/GL/");
 
             //Settings.DefaultCompatibility |=
             //    Settings.Legacy.UseDllImports | Settings.Legacy.UseWindowsCompatibleGL;

@@ -8,7 +8,9 @@
 
 using System;
 using System.Collections.Generic;
+#if !MINIMAL
 using System.Drawing;
+#endif
 #if ANDROID || IPHONE || MINIMAL
 using OpenTK.Minimal;
 #else
@@ -175,6 +177,9 @@ namespace OpenTK.Platform.X11
 
         [DllImport("libX11", EntryPoint = "XInternAtoms")]
         public extern static int XInternAtoms(IntPtr display, string[] atom_names, int atom_count, bool only_if_exists, IntPtr[] atoms);
+
+        [DllImport("libX11", EntryPoint = "XGetAtomName")]
+        public extern static IntPtr XGetAtomName(IntPtr display, IntPtr atom);
 
         [DllImport("libX11", EntryPoint = "XSetWMProtocols")]
         public extern static int XSetWMProtocols(IntPtr display, IntPtr window, IntPtr[] protocols, int count);

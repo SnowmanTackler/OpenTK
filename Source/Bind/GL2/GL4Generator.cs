@@ -35,8 +35,8 @@ namespace Bind.GL2
 {
     class GL4Generator : Generator
     {
-        public GL4Generator(Settings settings, string dirname)
-            : base(settings, dirname)
+        public GL4Generator(Settings settings)
+            : base(settings)
         {
             Settings.DefaultOutputPath = Path.Combine(
                 Settings.DefaultOutputPath, "../OpenGL4");
@@ -47,6 +47,9 @@ namespace Bind.GL2
             Settings.DefaultWrappersFile = "GL4.cs";
             Settings.DefaultDocPath = Path.Combine(
                 Settings.DefaultDocPath, "GL");
+
+            Settings.OverridesFiles.Add("GL2/overrides.xml");
+            Settings.OverridesFiles.Add("GL2/GL/");
 
             Profile = "glcore";
 
