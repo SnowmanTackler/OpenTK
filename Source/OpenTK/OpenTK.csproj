@@ -861,8 +861,28 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>set lock_location=..\lock_build.samlock
+if exist "%25lock_location%25" (
+     echo BUILDING OPEN TK - Already Building!
+     exit 0
+)
+if exist OpenTK.dll (
+     echo BUILDING OPEN TK - Already Built!
+     exit 0
+)
+set vs_location=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
+if NOT exist "%25vs_location%25" (
+     echo BUILDING OPEN TK - Couldn't Find Visual Studio!
+     exit 0
+)
+echo This is a sample text file &gt; %25lock_location%25
+echo BUILDING OPEN TK
+CALL "%25vs_location%25"
+devenv "../../../OpenTK.sln" /build Release
+devenv "../../../OpenTK.sln" /build Debug
+echo BUILDING OPEN TK COMPLETE
+del "%25lock_location%25"
+exit 0</PreBuildEvent>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
@@ -892,8 +912,5 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Platform\Linux\" />
-    <Folder Include="Platform\Linux\Bindings\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
