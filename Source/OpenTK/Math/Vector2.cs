@@ -36,6 +36,34 @@ namespace OpenTK
     [StructLayout(LayoutKind.Sequential)]
     public struct Vector2 : IEquatable<Vector2>
     {
+
+        /// <summary>
+        /// Left hand multiply (1x2) x (2x2)
+        /// </summary>
+        /// <param name="mat"></param>
+        /// <param name="vec"></param>
+        /// <returns></returns>
+        public static Vector2 operator * (Vector2 vec, Matrix2 mat)
+        {
+            return new Vector2(
+                Vector2.Dot(mat.Column0, vec),
+                Vector2.Dot(mat.Column1, vec)
+                );
+        }
+
+        /// <summary>
+        /// Right hand multiply (1x2) x (2x2)
+        /// </summary>
+        /// <param name="mat"></param>
+        /// <param name="vec"></param>
+        /// <returns></returns>
+        public static Vector2 operator * (Matrix2 mat, Vector2 vec)
+        {
+            return new Vector2(
+                Vector2.Dot(mat.Row0, vec),
+                Vector2.Dot(mat.Row1, vec)
+                );
+        }
         #region Fields
 
         /// <summary>
